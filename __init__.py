@@ -16,8 +16,6 @@ import psycopg2
 
 Base = declarative_base()
 
-def connect():
-	return psycopg2.connect("dbname=itemcatalog user=itemcatalog password=test host=localhost")
 
 class Category(Base):
     __tablename__ = 'category'
@@ -32,6 +30,9 @@ class Category(Base):
                 'id': self.id,
                 'name': self.name,
 }
+
+def connect():
+	return psycopg2.connect("dbname=itemcatalog user=itemcatalog password=test host=localhost")
 
 engine = create_engine('postgresql://', creator=connect)
 Base.metadata.create_all(engine)
