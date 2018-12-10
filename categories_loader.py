@@ -2,7 +2,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database_setup import Base, User, Category, Item
 
-engine = create_engine('sqlite:///catalogitem.db')
+def connect():
+	return psycopg2.connect("dbname=itemcatalog user=itemcatalog password=test host=localhost")
+
+engine = create_engine('postgresql://', creator=connect)
+Base.metadata.create_all(engine)
 
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
