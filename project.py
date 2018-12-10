@@ -40,7 +40,12 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 auth = HTTPBasicAuth()
 
 # Connect to Database and create database session
-engine = create_engine('sqlite:///catalogitem.db')
+def connect():
+    return psycopg2.connect(
+            "dbname=itemcatalog user=itemcatalog password=test host=localhost"
+            )
+
+engine = create_engine('postgresql://', creator=connect)
 Base.metadata.bind = engine
 
 session_factory = sessionmaker(bind=engine)
