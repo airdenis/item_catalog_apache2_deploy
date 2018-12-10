@@ -4,7 +4,9 @@ from database_setup import Base, User, Category, Item
 import psycopg2
 
 def connect():
-	return psycopg2.connect("dbname=itemcatalog user=itemcatalog password=test host=localhost")
+    return psycopg2.connect(
+            "dbname=itemcatalog user=itemcatalog password=test host=localhost"
+            )
 
 engine = create_engine('postgresql://', creator=connect)
 Base.metadata.create_all(engine)
