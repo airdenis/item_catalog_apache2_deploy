@@ -1,4 +1,5 @@
 import os
+import psycopg2
 from PIL import Image
 from flask import (
         Flask,
