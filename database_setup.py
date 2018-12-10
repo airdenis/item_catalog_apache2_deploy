@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 from passlib.apps import custom_app_context as pwd_context
 import random
 import string
+import psycopg2
 from itsdangerous import \
     (
         TimedJSONWebSignatureSerializer as
