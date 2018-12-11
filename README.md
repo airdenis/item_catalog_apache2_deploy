@@ -46,7 +46,7 @@ This project uses [Amazon Lightsail](https://amazonlightsail.com/) to create a L
 - [https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04)
 
 ### 3. Give grader access. ###
-#### In order for your project to be reviewed, the grader needs to be able to log in to your server. ####
+In order for your project to be reviewed, the grader needs to be able to log in to your server. 
 - Create a new user account named grader.
     - `sudo adduser grader`
 - Give grader the permission to sudo.
@@ -70,9 +70,9 @@ This project uses [Amazon Lightsail](https://amazonlightsail.com/) to create a L
     - [https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
     - [https://docs.sqlalchemy.org/en/latest/core/engines.html](https://docs.sqlalchemy.org/en/latest/core/engines.html)
     - [https://www.digitalocean.com/community/tutorials/how-to-use-roles-and-manage-grant-permissions-in-postgresql-on-a-vps--2](https://www.digitalocean.com/community/tutorials/how-to-use-roles-and-manage-grant-permissions-in-postgresql-on-a-vps--2)
-    - '''def connect():
-            return psycopg.connect(user='itemcatalog', host='localhost')
-        db = create_engine('postgresql://', creator=connect)'''
+    def connect():
+        return psycopg.connect(user='itemcatalog', host='localhost')
+    db = create_engine('postgresql://', creator=connect)
 
 ### 5. Do not allow remote connections ###
 - Create a new database user named catalog that has limited permissions to your catalog application database.
