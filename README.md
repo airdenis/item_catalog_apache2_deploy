@@ -46,14 +46,14 @@ This project uses [Amazon Lightsail](https://amazonlightsail.com/) to create a L
 3. Give grader access.
     In order for your project to be reviewed, the grader needs to be able to log in to your server.
     - Create a new user account named grader.
-            sudo adduser grader
+        - `sudo adduser grader`
     - Give grader the permission to sudo.
-        sudo vim /etc/sudoers.d/grader
-        add text `grader ALL=(ALL) NOPASSWD:ALL`
+        - `sudo vim /etc/sudoers.d/grader`
+        - add text `grader ALL=(ALL) NOPASSWD:ALL`
     - Create an SSH key pair for grader using the ssh-keygen tool.
-            ssh-keygen -t rsa
-            To login
-                ssh  grader@34.214.202.168 -p 2200
+        - ssh-keygen -t rsa
+        - To login
+                - ssh  grader@34.214.202.168 -p 2200
 
 4. Prepare to deploy your project.
     - Configure the local timezone to UTC.
