@@ -1,67 +1,109 @@
-# Item Catalog Web App #
-This web app is a project for the Udacity [FSND Course](https://www.udacity.com).
+# Linux Server Configuration(Item Catalog Apache2 Deploy)
+> Denis Ceban
 
-# Project Description #
-This project is a RESTful web application utilizing the Flask framework which accesses a SQL database that populates categories and their items. OAuth2 provides authentication for further CRUD functionality on the application. Third party OAuth2 is implemented for Google and FaceBook Accounts.
+## About
+This project involves taking a baseline installation of Linux on a virtual machine and preparing it to host web applications. This includes installing updates, securing the server from attacks, and installing / configuring web and database servers.
 
-# In This Repo #
-This project has the `view` Python module *project.py* which runs the Flask application. A SQL database is created using the `model` file *database_setup.py* module and you can populate the database with test data using *categories_loader.py*. The Flask application uses stored HTML templates in the tempaltes folder to build the front-end of the application.
+# Server Info
+- **Public IP:** 34.214.202.168
+- **Port:** 2200
+- [http://34.214.202.168/](http://34.214.202.168/)
 
-# Skills Used #
-1. Python
-2. HTML
-3. CSS
-4. OAuth
-5. Flask Framework
+## Getting Started
+This project uses [Amazon Lightsail](https://amazonlightsail.com/) to create a Linux server instance.
 
-# Installation #
-There are some dependancies and a few instructions on how to run the application. Seperate instructions are provided to get GConnect working also.
+1. Get your server.
+    - Start a new Ubuntu Linux server instance on Amazon Lightsail. 
+        * Log in!
+        * Create an instance
+        * Choose an instance image: Ubuntu (OS only)
+        * Choose your instance plan (lowest tier is fine)
+        * Give your instance a hostname
+        * Wait for startup
+        * Once the instance has started up, follow the instructions provided to SSH into your server.
 
-# Dependencies #
-- Vagrant
-- Udacity Vagrantfile
-- VirtualBox
+2. Secure your server.
+    - Update all currently installed packages.
+            sudo apt-get update
+            sudo apt-get upgrade
+        auto upgrades run
+            sudo dpkg-reconfigure --priority=low unattended-upgrades
+    - Change the SSH port from 22 to 2200. Make sure to configure the Lightsail firewall to allow it.
+        sudo vim /etc/ssh/sshd_config
+        change port form 22 to 2200
+        
+    - Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123).
+            sudo ufw allow 2200/tcp
+            sudo ufw allow 80/tcp
+            sudo ufw allow 123/tcp
+            sudo ufw enable
 
-# How to Install #
-1. Install Vagrant & VirtualBox [www.vagrant.com](www.vagrant.com), [www.virtualbox.org](www.virtualbox.org).
-2. Clone the Udacity Vagrantfile
-3. Go to Vagrant directory and either clone this repo or download and place zip here
-4. Launch the Vagrant VM (vagrant up)
-5. Log into Vagrant VM (vagrant ssh)
-6. Navigate to *cd/vagrant* as instructed in terminal
-7. `sudo apt-get update`
-8. `sudo pip install --upgrade oauth2client`
-9. `sudo pip install Flask`
-10. `sudo pip install passlib`
-11. `sudo pip install flask-httpauth`
-12. `sudo pip install request`
-13. `sudo pip install pillow`
-14. `sudo pip install python-resize-image`
-13. Setup application database python */item-catalog/database_setup.py*
-14. Insert fake data python */item-catalog/categories_loader.py* (inser your email address used for google or facebook account to be able to do CRUD manipulation with given data.)
-15. Run application using python */item-catalog/project.py*
-16. Access the application locally using [http://localhost:5000](http://localhost:5000)
+        Warning: When changing the SSH port, make sure that the firewall is open for port 2200 first, so that you don't lock yourself out of the server. Review this video for details! When you change the SSH port, the Lightsail instance will no longer be accessible through the web app 'Connect using SSH' button. The button assumes the default port is being used. There are instructions on the same page for connecting from your terminal to the instance. Connect using those instructions and then follow the rest of the steps.
+    - [https://www.udacity.com/course/linux-command-line-basics--ud595](https://www.udacity.com/course/linux-command-line-basics--ud595)
+    - [https://www.udacity.com/course/configuring-linux-web-servers--ud299](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
+    - [https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04)
 
-# Using Google Login #
-To get the Google login working there are a few additional steps:
+3. Give grader access.
+    In order for your project to be reviewed, the grader needs to be able to log in to your server.
+    - Create a new user account named grader.
+            sudo adduser grader
+    - Give grader the permission to sudo.
+        sudo vim /etc/sudoers.d/grader
+        add text `grader ALL=(ALL) NOPASSWD:ALL`
+    - Create an SSH key pair for grader using the ssh-keygen tool.
+            ssh-keygen -t rsa
+            To login
+                ssh  grader@34.214.202.168 -p 2200
 
-1. Go to Google Dev Console
-2. Sign up or Login if prompted
-3. Go to Credentials
-4. Select Create Crendentials > OAuth Client ID
-5. Select Web application
-6. Enter name **'Item-Catalog'**
-7. Authorized JavaScript origins = `'http://localhost:5000'`
-8. Authorized redirect URIs = `'http://localhost:5000/login'` && `'http://localhost:5000/gconnect'`
-9. Select Create
-10. Copy the Client ID and paste it into the data-clientid in `login.html`
-11. On the Dev Console Select Download JSON
-12. Rename JSON file to `client_secrets.json`
-13. Place JSON file in item-catalog directory that you cloned from here
-14. Run application using python */item-catalog/app.py*
+4. Prepare to deploy your project.
+    - Configure the local timezone to UTC.
+            sudo dpkg-reconfigure tzdata
+        * select none of the above, then UTC
+            
+    - Install and configure Apache to serve a Python mod_wsgi application.
+        [https://classroom.udacity.com/courses/ud299/lessons/4340119836/concepts/48065785530923](https://classroom.udacity.com/courses/ud299/lessons/4340119836/concepts/48065785530923)
+        [https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-16-04](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-16-04)
 
-# JSON Endpoints #
-The following is open to the public:
+    - Install and configure PostgreSQL:
+        [https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
+        [https://docs.sqlalchemy.org/en/latest/core/engines.html](https://docs.sqlalchemy.org/en/latest/core/engines.html)
+        [https://www.digitalocean.com/community/tutorials/how-to-use-roles-and-manage-grant-permissions-in-postgresql-on-a-vps--2](https://www.digitalocean.com/community/tutorials/how-to-use-roles-and-manage-grant-permissions-in-postgresql-on-a-vps--2)
+        `def connect():
+            return psycopg.connect(user='itemcatalog', host='localhost')
 
-Catalog JSON: /catalog.JSON - Displays the whole catalog. Categories and all items.
+        db = create_engine('postgresql://', creator=connect)`
+
+5. Do not allow remote connections
+    Create a new database user named catalog that has limited permissions to your catalog application database.
+        [https://help.ubuntu.com/community/PostgreSQL](https://help.ubuntu.com/community/PostgreSQL)
+
+6. Deploy the Item Catalog project.
+    [http://34.214.202.168/](http://34.214.202.168/)
+    [https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+    
+    # In This Repo #
+    This project has the `view` Python module *project.py* which runs the Flask application. A SQL database is created using the `model` file *database_setup.py* module and you can populate the database with test data using *categories_loader.py*. The Flask application uses stored HTML templates in the tempaltes folder to build the front-end of the application.
+
+
+    #To Install #
+    1. `sudo apt-get install python-pip`
+    2. `sudo apt-get install git-core`
+        [https://www.liquidweb.com/kb/install-git-ubuntu-16-04-lts/](https://www.liquidweb.com/kb/install-git-ubuntu-16-04-lts/)
+    3. `cd /var/www/Flaskapp/Flaskapp`
+    4. `git clone https://github.com/airdenis/item_catalog_apache2_deploy.git`
+    5. `sudo pip install virtualenv` and `sudo virtualenv venv`(if not performed after previous instructions)
+    6. `source venv/bin/activate`
+    7. `sudo apt-get update`
+    8. `sudo pip install --upgrade oauth2client`
+    9. `sudo pip install Flask`
+    10. `sudo pip install passlib`
+    11. `sudo pip install flask-httpauth`
+    12. `sudo pip install request`
+    13. `sudo pip install pillow`
+    14. `sudo pip install python-resize-image`
+    15. `sudo apt-get install python-psycopg2`
+    16. `deactivate`
+    17. `python database_setup.py` init the database.
+    18. Insert fake data python `python categories_loader.py` (inser your email address used for google or facebook account to be able to do CRUD manipulation with given data.)
+
 
