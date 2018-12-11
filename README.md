@@ -12,7 +12,7 @@ This project involves taking a baseline installation of Linux on a virtual machi
 ## Getting Started ##
 This project uses [Amazon Lightsail](https://amazonlightsail.com/) to create a Linux server instance.
 
-### 1. Get your server. ###
+### 1. Get your server. 
     - Start a new Ubuntu Linux server instance on Amazon Lightsail. 
         * Log in!
         * Create an instance
@@ -24,21 +24,22 @@ This project uses [Amazon Lightsail](https://amazonlightsail.com/) to create a L
 
 ### 2. Secure your server. ###
     - Update all currently installed packages.
-            sudo apt-get update
-            sudo apt-get upgrade
+            `sudo apt-get update`
+            `sudo apt-get upgrade`
         auto upgrades run
-            sudo dpkg-reconfigure --priority=low unattended-upgrades
+            `sudo dpkg-reconfigure --priority=low unattended-upgrades`
     - Change the SSH port from 22 to 2200. Make sure to configure the Lightsail firewall to allow it.
-        sudo vim /etc/ssh/sshd_config
+        `sudo vim /etc/ssh/sshd_config`
         change port form 22 to 2200
         
     - Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123).
-            sudo ufw allow 2200/tcp
-            sudo ufw allow 80/tcp
-            sudo ufw allow 123/tcp
-            sudo ufw enable
+            - `sudo ufw allow 2200/tcp`
+            - `sudo ufw allow 80/tcp`
+            - `sudo ufw allow 123/tcp`
+            - `sudo ufw enable`
 
-        Warning: When changing the SSH port, make sure that the firewall is open for port 2200 first, so that you don't lock yourself out of the server. Review this video for details! When you change the SSH port, the Lightsail instance will no longer be accessible through the web app 'Connect using SSH' button. The button assumes the default port is being used. There are instructions on the same page for connecting from your terminal to the instance. Connect using those instructions and then follow the rest of the steps.
+    - Warning: When changing the SSH port, make sure that the firewall is open for port 2200 first, so that you don't lock yourself out of the server. Review this video for details! When you change the SSH port, the Lightsail instance will no longer be accessible through the web app 'Connect using SSH' button. The button assumes the default port is being used. There are instructions on the same page for connecting from your terminal to the instance. Connect using those instructions and then follow the rest of the steps.
+
     - [https://www.udacity.com/course/linux-command-line-basics--ud595](https://www.udacity.com/course/linux-command-line-basics--ud595)
     - [https://www.udacity.com/course/configuring-linux-web-servers--ud299](https://www.udacity.com/course/configuring-linux-web-servers--ud299)
     - [https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04)
