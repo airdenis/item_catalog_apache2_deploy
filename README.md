@@ -70,18 +70,17 @@ This project uses [Amazon Lightsail](https://amazonlightsail.com/) to create a L
     - [https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
     - [https://docs.sqlalchemy.org/en/latest/core/engines.html](https://docs.sqlalchemy.org/en/latest/core/engines.html)
     - [https://www.digitalocean.com/community/tutorials/how-to-use-roles-and-manage-grant-permissions-in-postgresql-on-a-vps--2](https://www.digitalocean.com/community/tutorials/how-to-use-roles-and-manage-grant-permissions-in-postgresql-on-a-vps--2)
-    - `def connect():
-        return psycopg.connect(user='itemcatalog', host='localhost')
-
-        db = create_engine('postgresql://', creator=connect)`
+    - '''def connect():
+            return psycopg.connect(user='itemcatalog', host='localhost')
+        db = create_engine('postgresql://', creator=connect)'''
 
 ### 5. Do not allow remote connections ###
 - Create a new database user named catalog that has limited permissions to your catalog application database.
     - [https://help.ubuntu.com/community/PostgreSQL](https://help.ubuntu.com/community/PostgreSQL)
 
 ### 6. Deploy the Item Catalog project. ###
-    - [http://34.214.202.168/](http://34.214.202.168/)
-    - [https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
+- [http://34.214.202.168/](http://34.214.202.168/)
+- [https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps](https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps)
     
 #### In This Repo ####
 This project has the `view` Python module *project.py* which runs the Flask application. A SQL database is created using the `model` file *database_setup.py* module and you can populate the database with test data using *categories_loader.py*. The Flask application uses stored HTML templates in the tempaltes folder to build the front-end of the application.
