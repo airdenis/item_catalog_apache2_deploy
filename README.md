@@ -12,7 +12,7 @@ This project involves taking a baseline installation of Linux on a virtual machi
 ## Getting Started ##
 This project uses [Amazon Lightsail](https://amazonlightsail.com/) to create a Linux server instance.
 
-### 1. Get your server. 
+## 1. Get your server. 
     - Start a new Ubuntu Linux server instance on Amazon Lightsail. 
         * Log in!
         * Create an instance
