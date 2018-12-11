@@ -70,9 +70,11 @@ In order for your project to be reviewed, the grader needs to be able to log in 
     - [https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-16-04)
     - [https://docs.sqlalchemy.org/en/latest/core/engines.html](https://docs.sqlalchemy.org/en/latest/core/engines.html)
     - [https://www.digitalocean.com/community/tutorials/how-to-use-roles-and-manage-grant-permissions-in-postgresql-on-a-vps--2](https://www.digitalocean.com/community/tutorials/how-to-use-roles-and-manage-grant-permissions-in-postgresql-on-a-vps--2)
-    def connect():
-        return psycopg.connect(user='itemcatalog', host='localhost')
-    db = create_engine('postgresql://', creator=connect)
+    - ```python
+        def connect():
+            return psycopg.connect(user='itemcatalog', host='localhost')
+        db = create_engine('postgresql://', creator=connect)
+    ```
 
 ### 5. Do not allow remote connections ###
 - Create a new database user named catalog that has limited permissions to your catalog application database.
