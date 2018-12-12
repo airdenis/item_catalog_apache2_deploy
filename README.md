@@ -7,7 +7,7 @@ This project involves taking a baseline installation of Linux on a virtual machi
 ## Server Info ##
 - **Public IP:** 34.214.202.168
 - **Port:** 2200
-- [www.itemcatalog.gq](www.itemcatalog.gq)
+- [www.itemcatalog.gq](http://www.itemcatalog.gq)
 
 ## Getting Started ##
 This project uses [Amazon Lightsail](https://amazonlightsail.com/) to create a Linux server instance.
