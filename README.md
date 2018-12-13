@@ -111,4 +111,10 @@ This project has the `view` Python module *project.py* which runs the Flask appl
 17. `python database_setup.py` init the database.
 18. Insert fake data python `python categories_loader.py` (inser your email address used for google or facebook account to be able to do CRUD manipulation with given data.)
 
-
+##### *More links to write a good README* #####
+- [http://stackoverflow.com/questions/2304863/how-to-write-a-good-readme](http://stackoverflow.com/questions/2304863/how-to-write-a-good-readme)
+- [https://robots.thoughtbot.com/how-to-write-a-great-readme](https://robots.thoughtbot.com/how-to-write-a-great-readme)
+- [http://www.wikihow.com/Write-a-Read-Me](http://www.wikihow.com/Write-a-Read-Me)
+- [http://docs.writethedocs.org/writing/beginners-guide-to-docs/](http://docs.writethedocs.org/writing/beginners-guide-to-docs/)
+- [https://guides.github.com/features/mastering-markdown/](https://guides.github.com/features/mastering-markdown/)
+- [https://classroom.udacity.com/courses/ud777](https://classroom.udacity.com/courses/ud777)
