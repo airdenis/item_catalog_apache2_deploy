@@ -25,7 +25,9 @@ This project uses [Amazon Lightsail](https://amazonlightsail.com/) to create a L
 ### 2. Secure your server. ###
 - Update all currently installed packages.
     - `sudo apt-get update`
+        - [https://help.ubuntu.com/lts/serverguide/automatic-updates.html](https://help.ubuntu.com/lts/serverguide/automatic-updates.html)
     - `sudo apt-get upgrade`
+        - [https://serverfault.com/questions/262751/update-ubuntu-10-04/262773#262773](https://serverfault.com/questions/262751/update-ubuntu-10-04/262773#262773)
 
 - Auto upgrades run
     - `sudo dpkg-reconfigure --priority=low unattended-upgrades`
@@ -33,6 +35,7 @@ This project uses [Amazon Lightsail](https://amazonlightsail.com/) to create a L
 - Change the SSH port from 22 to 2200. Make sure to configure the Lightsail firewall to allow it.
     - `sudo vim /etc/ssh/sshd_config`
     - change port form 22 to 2200
+    - [http://www.cheat-sheets.org/saved-copy/OpenSSH_quickref.pdf](http://www.cheat-sheets.org/saved-copy/OpenSSH_quickref.pdf)
         
 - Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123).
     - `sudo ufw allow 2200/tcp`
