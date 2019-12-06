@@ -34,7 +34,7 @@ This project uses [Amazon Lightsail](https://amazonlightsail.com/) to create a L
 
 - Change the SSH port from 22 to 2200. Make sure to configure the Lightsail firewall to allow it.
     - `sudo vim /etc/ssh/sshd_config`
-    - change port form 22 to 2200
+    - change port form 22 to 2200 (**NOTE**: To enable changes made on `sshd_config` file - run this command to restart the system:`$ sudo systemctl reload sshd`).
     - [http://www.cheat-sheets.org/saved-copy/OpenSSH_quickref.pdf](http://www.cheat-sheets.org/saved-copy/OpenSSH_quickref.pdf)
         
 - Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123).
